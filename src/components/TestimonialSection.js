@@ -111,12 +111,20 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const scrollContainerRef = useRef(null);
+  const { width } = window.innerWidth;
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
+//   useEffect(() => {
+//     const intervalId = setInterval(() => {
+//         setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length); 
+//     }, 3000); 
+
+//     return () => clearInterval(intervalId);
+//   }, []);
+useEffect(() => {
     const intervalId = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length); 
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % (Math.ceil(testimonials.length / 6)));
     }, 3000); 
 
     return () => clearInterval(intervalId);
@@ -125,11 +133,22 @@ const TestimonialsSection = () => {
   useEffect(() => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({
-        left: currentIndex * scrollContainerRef.current.clientWidth,
+        left: (currentIndex % (Math.ceil(testimonials.length / 6))) * width,
         behavior: 'smooth',
       });
     }
-  }, [currentIndex]);
+  }, [currentIndex,width]);
+
+  
+
+//   useEffect(() => {
+//     if (scrollViewRef.current) {
+//       scrollViewRef.current.scrollTo({
+//         x: (currentIndex % (Math.ceil(testimonials.length / 6))) * width,
+//         animated: true,
+//       });
+//     }
+//   }, [currentIndex, width]);
 
   const renderTestimonials = () => {
     const rows = [];

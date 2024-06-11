@@ -8,7 +8,7 @@ const PricingCard = ({ title, subtitle, features, price }) => {
       <div className="flex-grow">
         {features.map((feature, index) => (
           <div key={index} className="flex items-center mb-2">
-            <img className="mr-2" src={require('../assets/checked.png')} alt="Checked" style={{ width: 20, height: 20 }} />
+            <img className="mr-2" src={require('../assets/checked.png')} alt="" style={{ width: 20, height: 20 }} />
             <p className="text-gray-900 text-base ml-2">{feature}</p>
           </div>
         ))}
