@@ -1,4 +1,3 @@
-// src/components/TestimonialsSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import TestimonialCard from '../shared/TestimonialCard';
 import avatar1 from '../assets/avatar1.jpeg'; 
