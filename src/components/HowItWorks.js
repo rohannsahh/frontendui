@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 
 const steps = [
   {
@@ -30,12 +31,14 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <div className="relative bg-gray-100 py-12 flex flex-col m-3 rounded-md shadow-lg items-center">
+    <>
+    <Header/>
+    <div className="relative bg-gray-100 py-12 flex flex-col rounded-md shadow-lg items-center">
       <div className="absolute inset-0">
         <img
           src={require('../assets/world.png')}
           alt="World Map"
-          className="object-cover  w-full h-full opacity-50"
+          className="object-cover  w-full h-full opacity-30"
         />
       </div>
       <div className="relative z-10 text-center mb-12">
@@ -60,6 +63,7 @@ const HowItWorks = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

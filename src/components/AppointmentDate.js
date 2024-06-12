@@ -20,7 +20,7 @@ const AppointmentDate = () => {
         <div
         className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{ backgroundImage: `url(${background})`, opacity:0.08 }}      ></div>
-      <div className="bg-white rounded-lg shadow-lg p-6 md:p-10 w-full max-w-3xl">
+      <div className="bg-white relative rounded-lg shadow-lg p-6 md:p-10 w-full max-w-3xl">
       <div className="absolute  ">
          <button className='lg:mt-4 lg:ml-4' onClick={()=>{navigate(-1)}}><img src={require('../assets/back-button.png')} alt='previous'/></button>
         </div >

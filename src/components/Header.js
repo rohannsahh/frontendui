@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
-const Header = () => {
+const Header = ({pricingRef}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => { 
+const scrollToSection = (ref) => {
+  ref.current.scrollIntoView({ behavior: 'smooth' });
+  setSidebarOpen(false); 
+};
+
+
+
+   const toggleSidebar = () => { 
     setSidebarOpen(!sidebarOpen);
   };
 
@@ -24,7 +31,8 @@ const Header = () => {
         <Link to="/how-it-works" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
           How it Works
         </Link>
-        <Link to="/pricing" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
+        <Link           onClick={() => scrollToSection(pricingRef)} 
+ className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
           Pricing
         </Link>
       </nav>
@@ -50,7 +58,7 @@ const Header = () => {
             <Link to="/how-it-works" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300" onClick={toggleSidebar}>
               How it Works
             </Link>
-            <Link to="/pricing" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300" onClick={toggleSidebar}>
+            <Link className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300" onClick={() => scrollToSection(pricingRef)}>
               Pricing
             </Link>
             <Link to="/login" className="bg-white py-2 px-4 mt-2 rounded-lg text-black text-xl font-semibold hover:bg-gray-200" onClick={toggleSidebar}>

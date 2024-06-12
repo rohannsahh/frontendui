@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import background from "../assets/loginbackground.webp"
-
+import showPasswordIcon from '../assets/show-password.png';
+import hidePasswordIcon from '../assets/hide.png';
 
 const SignUp= () => {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen " style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))", 
     }}>
@@ -10,31 +18,55 @@ const SignUp= () => {
         className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{ backgroundImage: `url(${background})`, opacity:0.08 }}      ></div>
       <h2 className="text-2xl font-bold text-center text-white mb-5">SchengenEase</h2>
-      <h3 className="text-3xl font-semibold text-center text-white mb-10">Sign up</h3>
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full  ">
-        <div className="flex justify-center mb-6">
-          <button className="flex items-center justify-center bg-blue-100 text-blue-700 p-2 rounded-md mx-2 w-1/2">
-            <img src={require("../assets/google.png")} alt="Google" className="w-6 h-6 mr-3" />
+      <h3 className="text-3xl font-semibold text-center text-white mb-9">Sign up</h3>
+      <div className="relative z-10 bg-white p-5 rounded-xl shadow-lg max-w-md w-full  ">
+        <div className='m-4'>
+        <div className="flex justify-center mb-3">
+          <button className="flex items-center justify-center bg-blue-100 text-blue-700 p-2 font-semibold rounded-md mx-2 w-1/2">
+            <img src={require("../assets/google.png")} alt="Google" className="w-6 h-6 mr-2" />
             Google
           </button>
-          
+         
         </div>
-        <p className="text-center text-gray-500 mb-3">Or</p>
+        <p className="text-center text-gray-600 mb-1">Or</p>
         <form>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="name">Name</label>
+            <label className="block text-black mb-2" htmlFor="name">Name</label>
             <input className="w-full p-2 border border-gray-300 rounded-md" type="text" id="name" placeholder="Name" />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+            <label className="block text-black mb-2" htmlFor="email">Email</label>
             <input className="w-full p-2 border border-gray-300 rounded-md" type="email" id="email" placeholder="Email" />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
-            <input className="w-full p-2 border border-gray-300 rounded-md" type="password" id="password" placeholder="Enter your password" />
-          </div>
+          <div className="mb-4">
+      <label className="block text-black mb-2" htmlFor="password">Password</label>
+      <div className="relative">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          id="password"
+          className="w-full p-3 border rounded-lg focus:outline-none mb-2 focus:border-blue-500"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        /> 
+
+          <button
+        type="button"
+        className="absolute right-3 top-3"
+        onClick={toggleShowPassword}
+      >
+        {showPassword ? (
+          <img src={showPasswordIcon} alt="Show Password" className="h-7 w-7" />
+        ) : (
+          <img src={hidePasswordIcon} alt="Hide Password" className="h-6 w-6" />
+        )}
+      </button>
+      </div>
+    </div>
           <button className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold" type="submit">Create account</button>
         </form>
+        </div>
+        
       </div>
     </div>
   );
