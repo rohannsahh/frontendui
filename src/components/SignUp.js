@@ -65,6 +65,9 @@ const SignUp= () => {
     </div>
           <button className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold" type="submit">Create account</button>
         </form>
+        <div className="text-center mt-6">
+          <p className="text-black">Already Have An Account? <a href="/Login" className="text-blue-900">Login</a></p>
+        </div>
         </div>
         
       </div>

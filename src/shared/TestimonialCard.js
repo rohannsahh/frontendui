@@ -3,7 +3,7 @@ import React from 'react';
 
 const TestimonialCard = ({ name, image, testimonial }) => {
   return (
-    <div className="bg-white overflow-hidden h-full p-5 rounded-lg border shadow-md flex items-center">
+    <div className="bg-white testimonial-card overflow-hidden h-full p-5 rounded-lg border shadow-md flex items-center">
       <img 
         className="w-16 h-16 rounded-full mr-4" 
         src={image} 

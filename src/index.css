@@ -2,24 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes scroll {
+
+
+@keyframes scrollx {
   0% {
-    transform: translateX(0);
+    transform: translateX(100%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 
-.overflow-x-scroll {
-  white-space: nowrap;
-  animation: scroll 20s linear infinite;
+.scrollx {
+  display: flex;
+  flex-direction: row;
+  width: 1500px;
+  overflow: hidden;
+  animation: scrollx 20s linear infinite;
+
+  /* border: 2px solid red; */
+
 }
 
-.dashed-line {
-  border-top: 2px dashed #1d4ed8;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.scrollx .testimonial-card {
+  flex: 0 0 auto;
+  object-fit: contain;
+  width: 450px;
+  height: 100%;
+  margin-right: 20px; 
+  
+
+}
+.group{
+  display: grid;
+  place-items: center;
+  width: clamp(10rem, 1rem + 40vmin, 30rem);
+  padding-left: calc(clamp(10rem, 1rem + 30vmin, 30rem) / 10);
+  margin-right: 200px; 
+
+}
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.3s linear;
 }

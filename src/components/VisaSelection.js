@@ -33,8 +33,8 @@ const VisaSelection = () => {
               onChange={() => setSelectedVisa('Schengen Visa')}
             />
             <div
-              className={`border rounded-lg overflow-hidden ${
-                selectedVisa === 'Schengen Visa' ? 'border-blue-500' : 'border-gray-300'
+              className={`border-2 rounded-lg overflow-hidden ${
+                selectedVisa === 'Schengen Visa' ? 'border-blue-700 shadow-xl' : 'border-gray-300'
               }`}
             >
               <img
@@ -55,8 +55,8 @@ const VisaSelection = () => {
               onChange={() => setSelectedVisa('Canada Visa')}
             />
             <div
-              className={`border rounded-lg overflow-hidden ${
-                selectedVisa === 'Canada Visa' ? 'border-blue-500' : 'border-gray-300'
+              className={`border-2 rounded-lg overflow-hidden ${
+                selectedVisa === 'Canada Visa' ? 'border-blue-700 shadow-xl' : 'border-gray-300'
               }`}
             >
               <img

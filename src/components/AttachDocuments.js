@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import background from "../assets/loginbackground.webp"
 import { useNavigate } from 'react-router-dom';
 
 const AttachDocuments = () => {
     const navigate = useNavigate();
+    const [bankStatement, setBankStatement] = useState('');
+    const [error, setError] = useState(false);
 
-    const handleClick=()=>{
+    const validateGoogleDriveLink = (link) => {
+      const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
+      return driveLinkPattern.test(link);
+    };
+
+    const handleClick = (e) => {
+      e.preventDefault(); 
+      if (bankStatement.trim() === '') {
+        setError('This field is required.');
+      } else if (!validateGoogleDriveLink(bankStatement)) {
+        setError('Please enter a valid Google Drive link.');
+      } else {
+        setError('');
         navigate('/appointment');
-    }
+      }
+    };
+
   return (
     <div className="flex items-center justify-center min-h-screen " style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))"
     }}>
@@ -21,14 +37,18 @@ const AttachDocuments = () => {
         <div className="text-center mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-4">2/4 Attach your Documents</h2></div>
         
-        <form>
-          <div className="mb-4">
+        <form onSubmit={handleClick}>
+        <div className="mb-4">
             <label className="block font-semibold text-gray-700">Bank Statement for last 6 months:</label>
             <input 
               type="text" 
-              className="mt-2 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              value={bankStatement}
+              onChange={(e) => setBankStatement(e.target.value)}
+              className={`mt-2 block w-full px-3 py-2 bg-white border ${error ? 'border-red-600 animate-vibrate' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
               placeholder="Paste the Google Drive Link"
+              required
             />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold">Choose your Nationality:</label>
@@ -53,8 +73,8 @@ const AttachDocuments = () => {
             <label className="block text-gray-700 font-semibold">Anything Else (optional):</label>
             <textarea 
               className="mt-2 block w-full h-16 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="*add any other details about your travel plan i.e tentative travel dates, specific countries"
             ></textarea>
+            <span>*add any other details about your travel plan i.e tentative travel  dates, specific countries</span>
           </div>
           <div className="flex justify-center">
             <button 
