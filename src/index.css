@@ -4,7 +4,7 @@
 
 
 
-@keyframes scrollx {
+/* @keyframes scrollx {
   0% {
     transform: translateX(100%);
   }
@@ -20,7 +20,7 @@
   overflow: hidden;
   animation: scrollx 20s linear infinite;
 
-  /* border: 2px solid red; */
+   border: 2px solid red; 
 
 }
 
@@ -40,7 +40,7 @@
   padding-left: calc(clamp(10rem, 1rem + 30vmin, 30rem) / 10);
   margin-right: 200px; 
 
-}
+} */
 
 @keyframes vibrate {
   0% { transform: translateX(0); }

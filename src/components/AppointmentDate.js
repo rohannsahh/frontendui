@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import background from "../assets/loginbackground.webp"
-// import TimePicker from 'react-time-picker';
+
 
 const AppointmentDate = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-//   const [selectedTime, setSelectedTime] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
   const navigate = useNavigate();
 
   const handleClick=()=>{
@@ -20,13 +19,16 @@ const AppointmentDate = () => {
         <div
         className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{ backgroundImage: `url(${background})`, opacity:0.08 }}      ></div>
-      <div className="bg-white relative rounded-lg shadow-lg p-6 md:p-10 w-full max-w-3xl">
+      <div className="bg-white relative rounded-lg shadow-lg p-2 md:p-10 w-full max-w-3xl">
       <div className="absolute  ">
          <button className='lg:mt-4 lg:ml-4' onClick={()=>{navigate(-1)}}><img src={require('../assets/back-button.png')} alt='previous'/></button>
         </div >
-        <div className="text-center mb-8"><h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-4">
+        <div className="text-center mb-8">
+          
+          <h2 className="text-xl sm:text-2xl font-bold text-[#191983] mt-8 sm:m-4">
           3/4 Choose Appointment Date and Time
-        </h2></div>
+        </h2>
+        </div>
         
         <div className="flex flex-col items-center ">
         <DatePicker
@@ -37,20 +39,7 @@ const AppointmentDate = () => {
             dateFormat="Pp"
             className="w-full"
           />
-          {/* <div className="mt-4">
-            <label className="block text-gray-900 text-center text-sm font-bold mb-2">
-              Choose Time:
-            </label>
-         
-
-            <input
-              type="time"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-              value={selectedTime}
-              onChange={(e) => setSelectedTime(e.target.value)}
-            />   <TimePicker  value={selectedTime}
-            onChange={(e) => setSelectedTime(e.target.value)}/>
-          </div> */}
+    
         </div>
         <div className="flex justify-center">
             <button 

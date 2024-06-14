@@ -30,7 +30,7 @@ const AttachDocuments = () => {
     <div
         className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{ backgroundImage: `url(${background})`, opacity:0.08 }}      ></div>
-      <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 lg:w-1/3 relative">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 md:w-3/4 space-y-2  lg:w-1/3 relative">
         <div className="absolute  ">
          <button className='mt-4 ml-4' onClick={()=>{navigate(-1)}}><img src={require('../assets/back-button.png')} alt='previous'/></button>
         </div >

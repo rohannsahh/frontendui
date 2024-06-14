@@ -4,11 +4,24 @@ import { useNavigate } from 'react-router-dom';
 
 const VisaSelection = () => {
   const [selectedVisa, setSelectedVisa] = useState(null);
+  const [error, setError] = useState('');
   const navigate= useNavigate();
 
-  const handleClick=()=>{
-    navigate('/attachDocuments')
-  }
+
+  const handleSelectVisa = (visa) => {
+    setSelectedVisa(visa);
+    setError('');
+  };
+
+  const handleClick = () => {
+    if (!selectedVisa) {
+      setError('*Please select a Visa !');
+    } else {
+     
+     
+      navigate('/attachDocuments')    }
+  };
+ 
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen relative" style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))"
@@ -30,7 +43,7 @@ const VisaSelection = () => {
               value="Schengen Visa"
               className="hidden"
               checked={selectedVisa === 'Schengen Visa'}
-              onChange={() => setSelectedVisa('Schengen Visa')}
+              onChange={() => handleSelectVisa('Schengen Visa')}
             />
             <div
               className={`border-2 rounded-lg overflow-hidden ${
@@ -52,7 +65,7 @@ const VisaSelection = () => {
               value="Canada Visa"
               className="hidden"
               checked={selectedVisa === 'Canada Visa'}
-              onChange={() => setSelectedVisa('Canada Visa')}
+              onChange={() => handleSelectVisa('Canada Visa')}
             />
             <div
               className={`border-2 rounded-lg overflow-hidden ${
@@ -68,6 +81,8 @@ const VisaSelection = () => {
             </div>
           </label>
         </div>
+        {error && <div className="text-red-500 animate-vibrate font-semibold text-lg text-center ">{error}</div>}
+
         <div className="flex justify-center">
             <button 
               type="submit" 
