@@ -7,11 +7,42 @@ import background from "../assets/loginbackground.webp"
 
 const AppointmentDate = () => {
   const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
 
-  const handleClick=()=>{
-    navigate('/choosePrice');
-  }
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setError('');
+  };
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
+    setError('');
+  };
+
+  
+  const handleClick = () => {
+    if (!selectedDate || !selectedTime) {
+      setError('*Please select both a date and time!');
+    } else if (selectedDateTime && selectedDateTime < new Date()) {
+      setError('*Please select a valid date and time!');
+    } else {
+      navigate('/choosePrice');
+    }
+  };
+  
+
+  const combineDateTime = (date, time) => {
+    if (!date || !time) return null;
+    const combined = new Date(date);
+    combined.setHours(time.getHours(), time.getMinutes());
+    return combined;
+  };
+
+  const selectedDateTime = combineDateTime(selectedDate, selectedTime);
+
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))"
@@ -19,13 +50,13 @@ const AppointmentDate = () => {
         <div
         className="absolute inset-0 bg-cover bg-center opacity-50"
         style={{ backgroundImage: `url(${background})`, opacity:0.08 }}      ></div>
-      <div className="bg-white relative rounded-lg shadow-lg p-2 md:p-4 w-full max-w-xl">
+      <div className="bg-white relative rounded-lg shadow-lg p-4 w-full max-w-xl">
       <div className="absolute  ">
          <button className='p-0' onClick={()=>{navigate(-1)}}><img src={require('../assets/back-button.png')} alt='previous'/></button>
         </div >
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           
-          <h2 className="text-xl sm:text-2xl font-bold text-[#191983]  sm:m-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#191983]  sm:m-3">
          &nbsp;   &nbsp;   &nbsp;  3/4 Choose Appointment Date and Time
         </h2>
         </div>
@@ -33,18 +64,31 @@ const AppointmentDate = () => {
         <div className="flex flex-col items-center ">
         <DatePicker
             selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
+            onChange={handleDateChange}
             inline
-            showTimeSelect
+            minDate={new Date()}
             dateFormat="Pp"
-            className="w-full"
+            className="w-full  "
+          />
+          <DatePicker
+            selected={selectedTime}
+            onChange={handleTimeChange}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="h:mm aa"
+            className="w-full border-gray-500 rounded-md shadow-md border m-1 p-1 text-center mt-4"
+            placeholderText="Select Time"
           />
     
         </div>
+        {error && <div className="text-red-500 animate-vibrate font-semibold text-lg text-center">{error}</div>}
+
         <div className="flex justify-center">
             <button 
               type="submit" 
-              className="bg-[#191983] text-white py-1 px-6 lg:text-xl rounded-lg mt-7 focus:outline-none hover:bg-blue-800"
+              className="bg-[#191983] text-white py-1 px-6 text-base lg:text-xl  rounded-lg mt-4 focus:outline-none hover:bg-blue-800"
             onClick={handleClick}>
               Next
             </button>

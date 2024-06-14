@@ -22,17 +22,17 @@ const scrollToSection = (ref) => {
         SchengenEase
       </div>
       <nav className="hidden md:flex flex-row items-center">
-        <Link to="/" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
+        <Link to="/" className="mx-2 text-white text-xl m-1 p-1 hover ">
           Home
         </Link>
-        <Link to="/know-us" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
+        <Link to="/know-us" className="mx-2 text-white text-xl m-1 p-1 hover">
           Know Us
         </Link>
-        <Link to="/how-it-works" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
+        <Link to="/how-it-works" className="mx-2 text-white text-xl m-1 p-1 hover">
           How it Works
         </Link>
-        <Link           onClick={() => scrollToSection(pricingRef)} 
- className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300">
+        <Link  onClick={() => scrollToSection(pricingRef)} 
+ className="mx-2 text-white text-xl m-1 p-1 hover ">
           Pricing
         </Link>
       </nav>

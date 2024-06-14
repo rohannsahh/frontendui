@@ -53,3 +53,38 @@
 .animate-vibrate {
   animation: vibrate 0.3s linear;
 }
+
+.hover {
+  @apply  hover:bg-white hover:py-1 px-3  hover:rounded-lg hover:text-black hover:font-semibold ;
+}
+
+
+
+/* DatePicker */
+
+.react-datepicker {
+  font-size: 1.2em; 
+}
+
+.react-datepicker__header {
+  font-size: 1.1em; 
+}
+
+.react-datepicker__month {
+  font-size: 1.1em; 
+  margin-bottom: 2px;
+}
+
+.react-datepicker__day {
+  width: 4em; 
+}
+
+.react-datepicker__time-container {
+  font-size: 1.1em; 
+}
+
+/* 
+.react-datepicker__time-list-item {
+  height: 3em; 
+  line-height: 3em;
+} */
