@@ -11,14 +11,14 @@ const ChoosePrice = () => {
 
   const PricingCard = ({ title, subtitle, features }) => {
     return (
-      <div className="bg-white rounded-2xl p-3   m-2 lg:h-80 w-full md:w-96 flex flex-col">
-        <h2 className=" text-xl sm:text-2xl text-center font-bold mb-2" style={{ color: '#000080' }}>{title}</h2>
-        <p className="text-black text-center font-semibold text-base mb-5">{subtitle}</p>
+      <div className="bg-white rounded-2xl p-2   m-2 lg:h-[290px] w-full md:w-80 flex flex-col">
+        <h2 className=" text-lg sm:text-xl text-center font-bold mb-1" style={{ color: '#000080' }}>{title}</h2>
+        <p className="text-black text-center font-semibold text-sm sm:text-base mb-4">{subtitle}</p>
         <div className="flex-grow">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center mb-2">
-              <img className="mr-2" src={require('../assets/checked.png')} alt="" style={{ width: 20, height: 20 }} />
-              <p className="text-gray-900 text-md  sm:text-base ml-2">{feature}</p>
+              <img className="mr-2" src={require('../assets/checked.png')} alt="" style={{ width: 18, height: 18 }} />
+              <p className="text-gray-900 text-sm  sm:text-base ml-1">{feature}</p>
             </div>
           ))}
         </div>
@@ -69,12 +69,12 @@ const ChoosePrice = () => {
 
     <div className="min-h-screen flex items-center justify-center p-4" style={{ background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))" }}>
       <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{ backgroundImage: `url(${background})`, opacity: 0.08 }}></div>
-      <div className="bg-white rounded-lg shadow-lg p-6 md:p-10 w-full relative max-w-5xl">
+      <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 w-full relative max-w-3xl">
         <div className="absolute">
           <button className='mt-4 ml-4' onClick={() => { navigate(-1) }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
         </div>
         <div className="text-center mb-8">
-          <h2 className="text-xl sm:text-3xl font-bold text-[#191983] m-4">4/4 Pricing</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-2">4/4 Pricing</h2>
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center  items-center sm:space-x-4 mb-6">
@@ -129,7 +129,7 @@ const ChoosePrice = () => {
           <div className='flex justify-center'>
             <button
               type="button"
-              className="bg-[#191983] text-white font-bold py-2 px-4 rounded-lg mt-6"
+              className="bg-[#191983] text-white font-bold  py-2 px-4 rounded-lg mt-1"
               onClick={handleSubmit}
             >
               Pay ₹{getPrice()}
