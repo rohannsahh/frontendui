@@ -8,12 +8,9 @@ const AttachDocuments = () => {
     const [error, setError] = useState(false);
 
     const validateGoogleDriveLink = (link) => {
-const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
-
-// eslint-disable-next-line no-useless-escape
-// const driveLinkPattern = /^(https://)?drive.google.com/[a-zA-Z0-9-_/]+$/;
-
-      return driveLinkPattern.test(link);
+ // eslint-disable-next-line no-useless-escape
+     const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
+       return driveLinkPattern.test(link);
     };
 
     const handleClick = (e) => {
