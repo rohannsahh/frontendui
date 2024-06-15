@@ -19,7 +19,7 @@ navigate('/login')  }
       <p className="text-xl md:text-2xl lg:text-3xl mt-4 mb-6">
         Expert Guidance and Personalized Feedback <br className="hidden md:block" /> hence reducing the rejection to ZERO*
       </p>
-      <button className="bg-white text-black font-semibold py-3 px-6 lg:text-2xl rounded-lg mt-6" onClick={handleClick}>
+      <button className="bg-white text-black font-semibold py-3 px-6 text-lg lg:text-2xl rounded-lg mt-6" onClick={handleClick}>
         Start Your Application
       </button>
       <Link to="/learn-more" className="mt-6 text-white underline underline-offset-2 text-lg md:text-xl">
