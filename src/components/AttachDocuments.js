@@ -28,7 +28,6 @@ const AttachDocuments = () => {
 
   const validateGoogleDriveLink = (link) => {
     // eslint-disable-next-line no-useless-escape
-    // const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
     const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
     return driveLinkPattern.test(link);
   };
