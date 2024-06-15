@@ -69,6 +69,10 @@ const FinalPage = ({ isOpen, onClose }) => {
             <h3 className="text-xl font-bold mb-2">Appointment</h3>
             <p><span className="font-semibold text-gray-700">Date :</span> {selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not set'}</p>
             <p><span className="font-semibold text-gray-700">Time :</span> {selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</p>
+            <p><span className="font-semibold text-gray-700">Name :</span> {}</p>
+            <p><span className="font-semibold text-gray-700">Email :</span> {}</p>
+            <p><span className="font-semibold text-gray-700">Mobile no. :</span> {}</p>
+
             <button onClick={() => handleEdit(3)} className="text-blue-600 mt-2">Edit</button>
           </div>
 
