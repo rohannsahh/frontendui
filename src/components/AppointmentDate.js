@@ -3,22 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import background from "../assets/loginbackground.webp"
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedDate, setSelectedTime } from '../redux/slices/appointmentSlice';
 
 
 const AppointmentDate = () => {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState(null);
+  const selectedDate = useSelector((state) => state.appointment.selectedDate);
+  const selectedTime = useSelector((state) => state.appointment.selectedTime);
 
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+  dispatch(setSelectedDate(date));
     setError('');
   };
   const handleTimeChange = (time) => {
-    setSelectedTime(time);
+    dispatch(setSelectedTime(time));
     setError('');
   };
 
