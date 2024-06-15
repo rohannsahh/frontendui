@@ -13,7 +13,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
  const handleClick=()=>{
-  navigate('/visaSelection')
+  navigate('/dashboard')
  }
 
   return (

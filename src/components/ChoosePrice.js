@@ -60,7 +60,6 @@ const ChoosePrice = () => {
   const handleSubmit = () => {
     if (selectedOption) {
       setModalOpen(true);
-       //navigate('/finalpage'); 
     }
   };
 

@@ -36,7 +36,7 @@ const FinalPage = ({ isOpen, onClose }) => {
   const handleConfirmAndPay = () => {
     onClose();
     alert('Submitted and Paid');
-    navigate('/')
+    navigate('/dashboard')
   };
 
   if (!isOpen) return null;
@@ -58,17 +58,17 @@ const FinalPage = ({ isOpen, onClose }) => {
 
           <div className="mb-4">
             <h3 className="text-xl font-bold mb-2">Personal Details</h3>
-            <p><span className="font-semibold">Bank Statement :</span> {bankStatement}</p>
-            <p><span className="font-semibold">Nationality :</span> {nationality}</p>
-            <p><span className="font-semibold">Occupation :</span> {occupation}</p>
-            <p><span className="font-semibold">Additional Info :</span> {additionalInfo}</p>
+            <p><span className="font-semibold text-gray-700">Bank Statement :</span> {bankStatement}</p>
+            <p><span className="font-semibold text-gray-700">Nationality :</span> {nationality}</p>
+            <p><span className="font-semibold text-gray-700">Occupation :</span> {occupation}</p>
+            <p><span className="font-semibold text-gray-700">Additional Info :</span> {additionalInfo}</p>
             <button onClick={() => handleEdit(2)} className="text-blue-600 mt-2">Edit</button>
           </div>
 
           <div className="mb-4">
             <h3 className="text-xl font-bold mb-2">Appointment</h3>
-            <p>Date: {selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not set'}</p>
-            <p>Time: {selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</p>
+            <p><span className="font-semibold text-gray-700">Date :</span> {selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not set'}</p>
+            <p><span className="font-semibold text-gray-700">Time :</span> {selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</p>
             <button onClick={() => handleEdit(3)} className="text-blue-600 mt-2">Edit</button>
           </div>
 
