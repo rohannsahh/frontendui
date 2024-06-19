@@ -24,7 +24,7 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center bg-white p-4 md:p-14">
+    <div className="flex flex-col items-center bg-white p-4 md:p-10">
       <h1 className="text-black text-3xl md:text-5xl font-bold  mb-10">Pricing</h1>
       <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-5">
       <div className="flex-1 flex">

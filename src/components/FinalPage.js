@@ -15,16 +15,17 @@ const FinalPage = ({ isOpen, onClose }) => {
   const selectedOption = useSelector((state) => state.pricing.selectedOption);
 
   const [promoModalOpen, setPromoModalOpen] = useState(false);
-  const [price, setPrice] = useState(getPrice(selectedOption));
+  const [discountedPrice, setDiscountedPrice] = useState(null); // New state for discounted price
 
-  function getPrice(option) {
-    if (option === 'Get Reviewed') {
-      return 1000;
-    } else if (option === 'A-Z prep') {
-      return 2000;
+  const getPrice = () => {
+    let price = 0;
+    if (selectedOption === 'Get Reviewed') {
+      price = 1000;
+    } else if (selectedOption === 'A-Z prep') {
+      price = 2000;
     }
-    return 0;
-  }
+    return discountedPrice !== null ? discountedPrice : price; // Use discounted price if available
+  };
 
   const handleEdit = (step) => {
     onClose();
@@ -52,8 +53,8 @@ const FinalPage = ({ isOpen, onClose }) => {
     navigate('/dashboard');
   };
 
-  const applyPromoCode = (discountedPrice) => {
-    setPrice(discountedPrice);
+  const applyPromoCode = (newPrice) => {
+    setDiscountedPrice(newPrice);
   };
 
   if (!isOpen) return null;
@@ -94,14 +95,11 @@ const FinalPage = ({ isOpen, onClose }) => {
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Date:</span>
                   <span>{selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not set'}</span>
+                  <span className='mx-5'>{selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</span>
+
                 </p>
               </div>
-              <div className="mb-1">
-                <p className="flex items-center">
-                  <span className="font-semibold text-gray-700 w-24">Time:</span>
-                  <span>{selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</span>
-                </p>
-              </div>
+              
               <div className="mb-1">
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Name:</span>
@@ -141,7 +139,7 @@ const FinalPage = ({ isOpen, onClose }) => {
                 className="bg-[#191983] text-white py-2 px-4 rounded-lg"
                 onClick={handleConfirmAndPay}
               >
-                Pay ₹{price}
+                Pay ₹{getPrice()}
               </button>
             </div>
           )}
@@ -150,8 +148,8 @@ const FinalPage = ({ isOpen, onClose }) => {
       <PromoCodeModal
         isOpen={promoModalOpen}
         onClose={() => setPromoModalOpen(false)}
-        originalPrice={getPrice(selectedOption)}
-        applyPromoCode={applyPromoCode}
+        originalPrice={getPrice()} // Pass the original price to the modal
+        applyPromoCode={applyPromoCode} // Pass the applyPromoCode function to the modal
       />
     </div>
   );

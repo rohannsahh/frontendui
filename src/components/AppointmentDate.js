@@ -78,7 +78,7 @@ const AppointmentDate = () => {
             onChange={handleTimeChange}
             showTimeSelect
             showTimeSelectOnly
-            timeIntervals={15}
+            timeIntervals={30}
             timeCaption="Time"
             dateFormat="h:mm aa"
             className="w-full border-gray-500 rounded-md shadow-md border m-1 p-1 text-center mt-4"
