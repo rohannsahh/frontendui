@@ -35,6 +35,9 @@ const scrollToSection = (ref) => {
  className="mx-2 text-white text-xl m-1 p-1 hover ">
           Pricing
         </Link>
+        <Link to="/blogs" className="mx-2 text-white text-xl m-1 p-1 hover">
+          Blogs
+        </Link>
       </nav>
       <Link to="/login" className="hidden md:block bg-white py-2 px-4 mt-2 md:mt-0 mr-10 rounded-lg text-black text-xl font-semibold hover:bg-gray-200">
         Launch App
@@ -60,6 +63,9 @@ const scrollToSection = (ref) => {
             </Link>
             <Link className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300" onClick={() => scrollToSection(pricingRef)}>
               Pricing
+            </Link>
+            <Link to="/blogs" className="mx-2 text-white text-xl m-1 p-1 hover:text-gray-300" onClick={toggleSidebar}>
+              Blogs
             </Link>
             <Link to="/login" className="bg-white py-2 px-4 mt-2 rounded-lg text-black text-xl font-semibold hover:bg-gray-200" onClick={toggleSidebar}>
               Launch App

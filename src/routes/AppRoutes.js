@@ -11,6 +11,8 @@ import AttachDocuments from '../components/AttachDocuments';
 import AppointmentDate from '../components/AppointmentDate';
 import ChoosePrice from '../components/ChoosePrice';
 import Dashboard from '../components/Dashboard';
+import Blogs from '../components/Blogs';
+import Offers from '../components/Offers';
 
 const AppRoutes = () => {
   return (
@@ -26,7 +28,8 @@ const AppRoutes = () => {
       <Route path="/appointment" element={<AppointmentDate/>}/>
       <Route path="/choosePrice" element={<ChoosePrice/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
-
+      <Route path='/blogs' element={<Blogs/>}/>
+      <Route path='/offers' element={<Offers/>}/>
 
 
 

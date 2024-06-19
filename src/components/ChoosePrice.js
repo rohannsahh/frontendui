@@ -118,7 +118,7 @@ const ChoosePrice = () => {
               className="bg-[#191983] text-white font-bold py-2 px-4 rounded-lg mt-1"
               onClick={handleSubmit}
             >
-              Pay ₹{getPrice()}
+             Confirm & Pay ₹{getPrice()}
             </button>
           </div>
         )}
