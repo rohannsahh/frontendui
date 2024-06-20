@@ -27,7 +27,7 @@ const FinalPage = ({ isOpen, onClose }) => {
     email: yup.string().email('Invalid email address').required('Email is required'),
   });
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors } ,getValues} = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -65,6 +65,7 @@ const FinalPage = ({ isOpen, onClose }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ amount }), // Sending custom amount to backend
+        
       }).then((t) => t.json());
   
       if (!data || !data.id) {
@@ -72,7 +73,7 @@ const FinalPage = ({ isOpen, onClose }) => {
         alert('Failed to create order. Please try again.');
         return;
       }
-  
+  console.log(amount)
       const options = {
         key: 'rzp_test_WiPul1Rjqfqr32', // Replace with your actual Key ID
         amount: data.amount,
@@ -83,9 +84,9 @@ const FinalPage = ({ isOpen, onClose }) => {
         order_id: data.id,
         callback_url: 'http://localhost:5000/verify',
         prefill: {
-          name: 'Rohan Kumar',
-          email: 'kumar@example.com',
-          contact: '9000090000',
+          name: getValues('name'), // Use the form values
+          email: getValues('email'), // Use the form values
+          contact: value, // Use the phone value
         },
         notes: {
           address: 'Razorpay Corporate Office',
@@ -153,8 +154,9 @@ const FinalPage = ({ isOpen, onClose }) => {
       return;
     }
     setPhoneError('');
-    onClose();
-   
+     
+    displayRazorpay();
+  onClose();
   };
 
   const applyPromoCode = (newPrice) => {
@@ -260,7 +262,7 @@ const FinalPage = ({ isOpen, onClose }) => {
           </div>
           {selectedOption && (
             <div className="flex justify-center mt-5">
-              <button  onClick={displayRazorpay}
+              <button  
                 type="submit"
                 className="bg-[#191983] text-white py-2 px-4 rounded-lg"
               >
