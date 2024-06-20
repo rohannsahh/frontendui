@@ -30,6 +30,9 @@ const VisaSelection = () => {
         style={{ backgroundImage: `url(${background})`, opacity: 0.08 }}
       ></div>
       <div className="relative z-10 bg-white p-6 sm:p-8 rounded-lg shadow-lg max-w-2xl w-full mx-4 sm:mx-0">
+      <div className="absolute">
+          <button className='lg:mt-4 lg:ml-4' onClick={() => { navigate('/dashboard') }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
+        </div>
         <div className="text-center mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-4">
             1/4 Choose the Country Travel Visa

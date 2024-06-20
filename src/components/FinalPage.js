@@ -129,7 +129,7 @@ const FinalPage = ({ isOpen, onClose }) => {
               <div className="mb-1">
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Name:</span>
-                  <input type="text" id="name" defaultValue="" className="flex-grow m-1 border p-1 rounded-md border-gray-400" />
+                  <input type="text" id="name" defaultValue="" className="flex-grow m-1 border p-1 rounded-md border-gray-400" required/>
                 </p>
               </div>
 
