@@ -68,14 +68,14 @@ const Footer = () => {
       <div>
         
       </div>
-      <div className="text-lg sm:text-xl mx-24 bg-gray-600 w-min p-3 rounded-lg  ">
+      {/* <div className="text-lg sm:text-xl mx-24 bg-gray-600 w-min p-3 rounded-lg  ">
   <p className="m-1 text-center sm:text-left">Subscribe to NewsLetter</p>
   <div className="flex flex-col sm:flex-row items-center">
     <label htmlFor="email" className="font-semibold mx-2">Email:</label>
     <input type="email" id="email" name="email" placeholder="Enter your email" className="w-full sm:w-auto px-4 mx-2 my-2 sm:my-0 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900" />
     <button className="bg-[#04043C] w-full sm:w-auto mx-2 sm:mx-3 rounded-lg p-2">Subscribe</button>
   </div>
-</div>
+</div> */}
       <div className="flex justify-center lg:justify-start max-w-7xl mx-auto mt-4">
         <a href="#test" className="mx-2">
           <img src={facebook} alt="Facebook" className="w-8 h-8"/>

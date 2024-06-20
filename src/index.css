@@ -88,3 +88,8 @@
   height: 3em; 
   line-height: 3em;
 } */
+.text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}

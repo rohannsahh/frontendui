@@ -18,6 +18,12 @@ const AttachDocuments = () => {
   const [localOccupation, setLocalOccupation] = useState(occupation);
   const [localAdditionalInfo, setLocalAdditionalInfo] = useState(additionalInfo);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({
+    loading: true,
+    success: false,
+    message: 'Checking link accessibility...',
+  });
 
   useEffect(() => {
     setLocalBankStatement(bankStatement);
@@ -27,13 +33,22 @@ const AttachDocuments = () => {
   }, [bankStatement, nationality, occupation, additionalInfo]);
 
   const validateGoogleDriveLink = (link) => {
-    // eslint-disable-next-line no-useless-escape
-    const driveLinkPattern = /^(https:\/\/)?drive\.google\.com\/[a-zA-Z0-9-_\/]+$/;
+    const driveLinkPattern = /^(https:\/\/)?(www\.)?drive\.google\.com\/(file\/d\/|open\?id=)[a-zA-Z0-9-_]+/;
     return driveLinkPattern.test(link);
-    
   };
 
-  const handleClick = (e) => {
+  const checkDriveLinkAccess = async (link) => {
+    try {
+      const response = await fetch(`http://localhost:5000/check-link?link=${encodeURIComponent(link)}`);
+      const data = await response.json();
+      return data.accessible;
+    } catch (error) {
+      console.error('Error accessing the link:', error);
+      return false;
+    }
+  };
+
+  const handleClick = async (e) => {
     e.preventDefault();
     if (localBankStatement.trim() === '') {
       setError('This field is required.');
@@ -41,11 +56,34 @@ const AttachDocuments = () => {
       setError('Please enter a valid Google Drive link.');
     } else {
       setError('');
-      dispatch(setBankStatement(localBankStatement));
-      dispatch(setNationality(localNationality));
-      dispatch(setOccupation(localOccupation));
-      dispatch(setAdditionalInfo(localAdditionalInfo));
-      navigate('/appointment');
+      setIsModalOpen(true);
+      setModalContent({
+        loading: true,
+        success: false,
+        message: 'Checking link accessibility...',
+      });
+      const isAccessible = await checkDriveLinkAccess(localBankStatement);
+      if (isAccessible) {
+        setModalContent({
+          loading: false,
+          success: true,
+          message: 'Link accessed',
+        });
+        setTimeout(() => {
+          setIsModalOpen(false);
+          dispatch(setBankStatement(localBankStatement));
+          dispatch(setNationality(localNationality));
+          dispatch(setOccupation(localOccupation));
+          dispatch(setAdditionalInfo(localAdditionalInfo));
+          navigate('/appointment');
+        }, 2000);
+      } else {
+        setModalContent({
+          loading: false,
+          success: false,
+          message: 'The Google Drive link is not accessible. Please ensure the document is shared properly.',
+        });
+      }
     }
   };
 
@@ -120,6 +158,41 @@ const AttachDocuments = () => {
           </div>
         </form>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-11/12 sm:w-3/4 lg:w-1/4">
+            <div className="text-center">
+              {modalContent.loading ? (
+                <>
+                  <svg className="animate-spin h-8 w-8 text-blue-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.963 7.963 0 014 12H0c0 2.21.896 4.21 2.342 5.658l1.658-1.367z"></path>
+                  </svg>
+                  <p className="mt-4 text-lg font-medium">{modalContent.message}</p>
+                </>
+              ) : modalContent.success ? (
+                <div className='flex flex-col items-center'>
+                  <img src={require('../assets/correcttick.png')} alt='success' className='w-8 h-8'/>
+                  
+                  <p className="mt-4 text-xl font-medium">{modalContent.message}</p>
+                </div>
+              ) : (
+                <div className='flex flex-col items-center'>
+         <img src={require('../assets/deletebutton.png')} alt='success' className='w-8 h-8'/>
+        <p className="mt-4 text-lg ">{modalContent.message}</p>
+         <button 
+    className='mt-4 text-white bg-red-600 py-1 px-4 rounded-lg hover:bg-red-400' 
+    onClick={() => setIsModalOpen(false)}
+  >
+    Close
+        </button>
+      </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

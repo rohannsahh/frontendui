@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PromoCodeModal from '../shared/PromoCodeModal';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 const FinalPage = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -13,9 +18,25 @@ const FinalPage = ({ isOpen, onClose }) => {
   const selectedDate = useSelector((state) => state.appointment.selectedDate);
   const selectedTime = useSelector((state) => state.appointment.selectedTime);
   const selectedOption = useSelector((state) => state.pricing.selectedOption);
-
+  const [phoneError, setPhoneError] = useState('');
   const [promoModalOpen, setPromoModalOpen] = useState(false);
-  const [discountedPrice, setDiscountedPrice] = useState(null); // New state for discounted price
+  const [discountedPrice, setDiscountedPrice] = useState(null);
+  const [value, setValue] = useState('');
+
+  const validationSchema = yup.object().shape({
+    email: yup.string().email('Invalid email address').required('Email is required'),
+  });
+
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const handlePhoneChange = (newValue) => {
+    setValue(newValue);
+    if (phoneError && isValidPhoneNumber(newValue)) {
+      setPhoneError('');
+    }
+  };
 
   const getPrice = () => {
     let price = 0;
@@ -24,7 +45,7 @@ const FinalPage = ({ isOpen, onClose }) => {
     } else if (selectedOption === 'A-Z prep') {
       price = 2000;
     }
-    return discountedPrice !== null ? discountedPrice : price; // Use discounted price if available
+    return discountedPrice !== null ? discountedPrice : price;
   };
 
   const handleEdit = (step) => {
@@ -47,7 +68,12 @@ const FinalPage = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleConfirmAndPay = () => {
+  const onSubmit = (data) => {
+    if (!isValidPhoneNumber(value)) {
+      setPhoneError('Invalid phone number');
+      return;
+    }
+    setPhoneError('');
     onClose();
     alert('Submitted and Paid');
     navigate('/dashboard');
@@ -62,7 +88,7 @@ const FinalPage = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg m-3 px-3 shadow-lg w-full max-w-lg">
-        <div className="p-4 relative">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-4 relative">
           <button onClick={onClose} className="text-red-500 hover:text-black text-2xl absolute right-2 top-4">
             &times;
           </button>
@@ -79,7 +105,7 @@ const FinalPage = ({ isOpen, onClose }) => {
               <h3 className="text-xl font-bold">Personal Details</h3>
               <button onClick={() => handleEdit(2)} className="text-blue-600">Edit</button>
             </div>
-            <p className="mb-1"><span className="font-semibold text-gray-700">Bank Statement:</span> <span className="mx-3">{bankStatement}</span></p>
+            <p className="mb-1 text-wrap"><span className="font-semibold text-gray-700">Bank Statement:</span> <span className="mx-2  ">{bankStatement}</span></p>
             <p className="mb-1"><span className="font-semibold text-gray-700">Nationality:</span> <span className="mx-3">{nationality}</span></p>
             <p className="mb-1"><span className="font-semibold text-gray-700">Occupation:</span> <span className="mx-3">{occupation}</span></p>
             <p className="mb-1"><span className="font-semibold text-gray-700">Additional Info:</span> <span className="mx-3">{additionalInfo}</span></p>
@@ -95,8 +121,7 @@ const FinalPage = ({ isOpen, onClose }) => {
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Date:</span>
                   <span>{selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not set'}</span>
-                  <span className='mx-5'>{selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</span>
-
+                  <span className="mx-5">{selectedTime ? new Date(selectedTime).toLocaleTimeString() : 'Not set'}</span>
                 </p>
               </div>
               
@@ -106,17 +131,40 @@ const FinalPage = ({ isOpen, onClose }) => {
                   <input type="text" id="name" defaultValue="" className="flex-grow m-1 border p-1 rounded-md border-gray-400" />
                 </p>
               </div>
+
               <div className="mb-1">
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Email:</span>
-                  <input type="email" id="email" defaultValue="" className="flex-grow m-1 border rounded-md p-1 border-gray-400" />
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        type="email"
+                        {...field}
+                        className={`flex-grow m-1 border rounded-md p-1 border-gray-400 ${errors.email ? 'border-red-500' : ''}`}
+                      />
+                    )}
+                  />
                 </p>
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
+
               <div className="mb-1">
                 <p className="flex items-center">
                   <span className="font-semibold text-gray-700 w-24">Mobile no:</span>
-                  <input type="text" id="number" defaultValue="" className="flex-grow m-1 p-1 border rounded-md border-gray-400" />
+                  <PhoneInput
+                    placeholder="Enter phone number"
+                    international
+                    countryCallingCodeEditable={false}
+                    defaultCountry="IN"
+                    value={value}
+                    onChange={handlePhoneChange}
+                    className="flex-grow m-1 p-1 border rounded-md border-gray-400"
+                    id="number"
+                  />
                 </p>
+                {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
               </div>
             </div>
           </div>
@@ -135,21 +183,20 @@ const FinalPage = ({ isOpen, onClose }) => {
           {selectedOption && (
             <div className="flex justify-center mt-5">
               <button
-                type="button"
+                type="submit"
                 className="bg-[#191983] text-white py-2 px-4 rounded-lg"
-                onClick={handleConfirmAndPay}
               >
                 Pay ₹{getPrice()}
               </button>
             </div>
           )}
-        </div>
+        </form>
       </div>
       <PromoCodeModal
         isOpen={promoModalOpen}
         onClose={() => setPromoModalOpen(false)}
-        originalPrice={getPrice()} // Pass the original price to the modal
-        applyPromoCode={applyPromoCode} // Pass the applyPromoCode function to the modal
+        originalPrice={getPrice()}
+        applyPromoCode={applyPromoCode}
       />
     </div>
   );
