@@ -38,6 +38,83 @@ const FinalPage = ({ isOpen, onClose }) => {
     }
   };
 
+
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay() {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+  
+    if (!res) {
+      alert('Razorpay SDK failed to load!');
+      return;
+    }
+  
+    try {
+      const amount = getPrice(); // Get the custom price
+      const data = await fetch('http://localhost:5000/razorpay', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount }), // Sending custom amount to backend
+      }).then((t) => t.json());
+  
+      if (!data || !data.id) {
+        console.error('Invalid response from server:', data);
+        alert('Failed to create order. Please try again.');
+        return;
+      }
+  
+      const options = {
+        key: 'rzp_test_WiPul1Rjqfqr32', // Replace with your actual Key ID
+        amount: data.amount,
+        currency: data.currency,
+        name: 'SchengenEase',
+        description: 'Test Transaction',
+        image: 'https://example.com/your_logo',
+        order_id: data.id,
+        callback_url: 'http://localhost:5000/verify',
+        prefill: {
+          name: 'Rohan Kumar',
+          email: 'kumar@example.com',
+          contact: '9000090000',
+        },
+        notes: {
+          address: 'Razorpay Corporate Office',
+        },
+        theme: {
+          color: '#000080',
+        },
+        handler: function (response) {
+          console.log(response);
+          navigate('/dashboard');
+        },
+        modal: {
+          ondismiss: function () {
+            console.log('Checkout form closed');
+          },
+        },
+      };
+  
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      console.error('Error creating Razorpay order:', error);
+      alert('Oops! Something went wrong.\nError in opening checkout');
+    }
+  }
+  
+
+
+
   const getPrice = () => {
     let price = 0;
     if (selectedOption === 'Get Reviewed') {
@@ -70,14 +147,14 @@ const FinalPage = ({ isOpen, onClose }) => {
   };
 
   const onSubmit = (data) => {
+
     if (!isValidPhoneNumber(value)) {
       setPhoneError('Invalid phone number');
       return;
     }
     setPhoneError('');
     onClose();
-    alert('Submitted and Paid');
-    navigate('/dashboard');
+   
   };
 
   const applyPromoCode = (newPrice) => {
@@ -183,7 +260,7 @@ const FinalPage = ({ isOpen, onClose }) => {
           </div>
           {selectedOption && (
             <div className="flex justify-center mt-5">
-              <button
+              <button  onClick={displayRazorpay}
                 type="submit"
                 className="bg-[#191983] text-white py-2 px-4 rounded-lg"
               >

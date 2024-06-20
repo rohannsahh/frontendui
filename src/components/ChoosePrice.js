@@ -68,7 +68,7 @@ const ChoosePrice = () => {
       <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{ backgroundImage: `url(${background})`, opacity: 0.08 }}></div>
       <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 w-full relative max-w-3xl">
         <div className="absolute">
-          <button className='mt-4 ml-4' onClick={() => { navigate(-1) }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
+          <button className='mt-4 ml-4' onClick={() => { navigate('/appointment') }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
         </div>
         <div className="text-center mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-2">4/4 Pricing</h2>

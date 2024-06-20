@@ -92,7 +92,7 @@ const AttachDocuments = () => {
       <div className="absolute inset-0 bg-cover bg-center opacity-50" style={{ backgroundImage: `url(${background})`, opacity: 0.08 }}></div>
       <div className="bg-white rounded-lg shadow-lg p-3 sm:p-8 w-11/12 md:w-3/4 space-y-2 lg:w-1/3 relative">
         <div className="absolute">
-          <button className='lg:mt-4 lg:ml-4' onClick={() => { navigate(-1) }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
+          <button className='lg:mt-4 lg:ml-4' onClick={() => { navigate('/visaSelection') }}><img src={require('../assets/back-button.png')} alt='previous' /></button>
         </div>
         <div className="text-center mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-[#191983] m-4">2/4 Attach your Documents</h2>
