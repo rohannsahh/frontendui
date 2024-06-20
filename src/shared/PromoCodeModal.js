@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const PromoCodeModal = ({ isOpen, onClose, originalPrice, applyPromoCode }) => {
   const [promoCode, setPromoCode] = useState('');
+  // eslint-disable-next-line
   const [discountedPrice, setDiscountedPrice] = useState(originalPrice);
   const [error, setError] = useState('');
 
