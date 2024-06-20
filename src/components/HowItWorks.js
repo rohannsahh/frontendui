@@ -2,33 +2,33 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
-const steps = [
-  {
-    number: '1',
-    title: 'Fill in Details',
-    description: 'Submit all valid information when booking your consultation.',
-  },
-  {
-    number: '2',
-    title: 'Reviewing Your Details',
-    description: 'We take one business day to check and understand your application.',
-  },
-  {
-    number: '3',
-    title: 'Personalized Consultation',
-    description: 'Receive tailored advice for your specific case.',
-  },
-  {
-    number: '4',
-    title: 'Apply to the Required Visa Country',
-    description: 'Apply directly with the Embassy once your application is ready.',
-  },
-  {
-    number: '5',
-    title: 'Bon Voyage',
-    description: 'You\'re all set for your journey!',
-  },
-];
+// const steps = [
+//   {
+//     number: '1',
+//     title: 'Fill in Details',
+//     description: 'Submit all valid information when booking your consultation.',
+//   },
+//   {
+//     number: '2',
+//     title: 'Reviewing Your Details',
+//     description: 'We take one business day to check and understand your application.',
+//   },
+//   {
+//     number: '3',
+//     title: 'Personalized Consultation',
+//     description: 'Receive tailored advice for your specific case.',
+//   },
+//   {
+//     number: '4',
+//     title: 'Apply to the Required Visa Country',
+//     description: 'Apply directly with the Embassy once your application is ready.',
+//   },
+//   {
+//     number: '5',
+//     title: 'Bon Voyage',
+//     description: 'You\'re all set for your journey!',
+//   },
+// ];
 
 const HowItWorks = () => {
   return (

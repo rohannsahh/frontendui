@@ -45,6 +45,7 @@ const FinalPage = ({ isOpen, onClose }) => {
     } else if (selectedOption === 'A-Z prep') {
       price = 2000;
     }
+    //es-lint
     return discountedPrice !== null ? discountedPrice : price;
   };
 
