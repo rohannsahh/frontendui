@@ -73,7 +73,6 @@ const FinalPage = ({ isOpen, onClose }) => {
         alert('Failed to create order. Please try again.');
         return;
       }
-  console.log(amount)
       const options = {
         key: 'rzp_test_WiPul1Rjqfqr32', // Replace with your actual Key ID
         amount: data.amount,
