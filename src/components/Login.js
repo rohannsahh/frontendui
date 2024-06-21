@@ -6,15 +6,47 @@ import hidePasswordIcon from '../assets/hide.png';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
- const handleClick=()=>{
-  navigate('/dashboard')
- }
+//  const handleClick=()=>{
+//   navigate('/dashboard')
+//  }
+const handleLogin = async (event) => {
+  event.preventDefault();
+  setError('');
+
+  try {
+    const response = await fetch('http://localhost:5000/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+
+    const data = await response.json();
+    const token = data.token;
+
+    // Store the token in localStorage
+    localStorage.setItem('accessToken', token);
+
+    // Redirect to the dashboard
+    navigate('/dashboard');
+  } catch (error) {
+    setError('Invalid email or password');
+  }
+};
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen  relative" style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))"
@@ -36,10 +68,13 @@ const Login = () => {
          
         </div>
         <p className="text-center text-gray-600 mb-1">Or</p>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label className="block text-black mb-2" htmlFor="email">Email</label>
-            <input className="w-full p-2 border border-gray-300 rounded-md" type="email" id="email" placeholder="Email" />
+            <input className="w-full p-2 border border-gray-300 rounded-md" type="email" id="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email" />
           </div>
           
           <div className="mb-4">
@@ -68,8 +103,9 @@ const Login = () => {
       </div>
     </div>
           
-          <button className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold" type="submit" onClick={handleClick}>Login now</button>
+          <button className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold" type="submit" >Login now</button>
         </form>
+        {error && <p className="text-red-500 mt-4">{error}</p>}
         <div className="text-center mt-6">
           <p className="text-black">Don't Have An Account? <a href="/signup" className="text-blue-900">Sign Up</a></p>
         </div>
