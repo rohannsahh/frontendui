@@ -23,6 +23,8 @@ const handleGoogleSignUp = async (credentialResponse) => {
   const decoded = jwtDecode(credentialResponse.credential);
   const { name, email } = decoded;
 
+
+  
   try {
     // Call your backend API to create a new user
 
