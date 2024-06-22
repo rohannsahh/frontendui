@@ -91,7 +91,7 @@ const SignUp= () => {
     console.log('Google Login Failed');
   }}
   uxMode="redirect"
-  redirectUri="http://localhost:3000/dashboard"
+  redirectUri="http://localhost:3000/signup"
 />
         </div>
         <p className="text-center text-gray-600 mb-1">Or</p>
