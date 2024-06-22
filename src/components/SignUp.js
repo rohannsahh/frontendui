@@ -19,15 +19,16 @@ const SignUp= () => {
 
   const handleGoogleSignUp = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
+    console.log('decode value'+ decoded)
     const { name, email } = decoded;
 
     try {
       // Call your backend API to create a new user
-      const signUpResponse = await axios.post('/api/signup', { name, email, googleAuth: true });
+      const signUpResponse = await axios.post('http://localhost:5000/api/users/signup', { name, email, googleAuth: true });
       
       if (signUpResponse.data.success) {
         // If signup is successful, automatically log the user in
-        const loginResponse = await axios.post('/api/login', { email, googleAuth: true });
+        const loginResponse = await axios.post('http://localhost:5000/api/users/login', { email, googleAuth: true });
         
         if (loginResponse.data.success) {
           // Store the token in localStorage or a secure storage method
@@ -61,6 +62,7 @@ const SignUp= () => {
           navigate('/dashboard');
         }
       }
+      
     } catch (error) {
       console.error('Error during manual Sign Up:', error);
       // Handle error (e.g., show error message to user)
@@ -89,7 +91,7 @@ const SignUp= () => {
     console.log('Google Login Failed');
   }}
   uxMode="redirect"
-  redirectUri="http://localhost:3000/signup"
+  redirectUri="http://localhost:3000/dashboard"
 />
         </div>
         <p className="text-center text-gray-600 mb-1">Or</p>
