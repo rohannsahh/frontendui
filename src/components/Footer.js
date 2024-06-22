@@ -55,7 +55,7 @@ const Footer = () => {
           <p className="m-1">Cookies</p>
         </div>
         
-        <div className="flex flex-col items-center md:items-end m-4 w-full text-lg md:w-2/3 text-center md:text-right">
+        <div className="flex flex-col items-center md:items-end lg:m-4 w-full text-lg md:w-2/3 text-center md:text-right">
           <button className="bg-white text-[#000080] font-bold py-2 px-4 rounded-lg mt-4">SchengenEase</button>
           <p className="mt-3">12083-9473-2093</p>
           <p className="mt-3">support@schengenease.com</p>

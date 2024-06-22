@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
  import TestimonialCard from '../shared/TestimonialCard';
 import avatar1 from '../assets/avatar1.jpeg'; 
+import CountUp from 'react-countup';
 
 const testimonials = [
   {
@@ -10,76 +11,76 @@ const testimonials = [
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
   {
-    id: '1',
+    id: '2',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '3',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '4',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '5',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '6',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '7',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '8',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '9',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
   {
-    id: '1',
-    name: 'Ayushi Mehra',
-    image: avatar1,
-    testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
-  },
- 
-  {
-    id: '1',
+    id: '10',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
   },
  
   {
-    id: '1',
+    id: '11',
+    name: 'Ayushi Mehra',
+    image: avatar1,
+    testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
+  },
+ 
+  {
+    id: '12',
     name: 'Ayushi Mehra',
     image: avatar1,
     testimonial: 'Efficient, knowledgeable, and immensely helpful - their guidance made navigating Schengen visa requirements a breeze.',
@@ -145,6 +146,22 @@ const TestimonialsSection = () => {
           {renderTestimonials()}
         </div>
       </div>
+      <div className="bg-[#000080] text-white mt-5 rounded p-8">
+      <div className="container mx-auto flex flex-col md:flex-row justify-around items-center">
+        <div className="text-center p-4">
+          <CountUp end={50} duration={2.75} className="text-4xl md:text-5xl font-bold" /><span className='text-5xl p-1 font-bold'>+</span>
+          <p className="text-xl md:text-xl mt-2">happy customers</p>
+        </div>
+        <div className="text-center p-4">
+          <CountUp end={100000} duration={2.75} className="text-4xl md:text-5xl font-bold" /><span className='text-5xl p-1 font-bold'>+</span>
+          <p className="text-xl md:text-xl mt-2">helped our customers save money</p>
+        </div>
+        <div className="text-center p-4">
+          <CountUp end={200} duration={2.75} className="text-4xl md:text-5xl font-bold" /><span className='text-5xl p-1 font-bold'>+</span>
+          <p className="text-xl md:text-xl mt-2">appointments already booked</p>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

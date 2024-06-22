@@ -1,14 +1,22 @@
 import React, {  useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 const Header = ({pricingRef}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-const scrollToSection = (ref) => {
-  ref.current.scrollIntoView({ behavior: 'smooth' });
-  setSidebarOpen(false); 
-};
+  const navigate = useNavigate();
+  const scrollToSection = (ref) => {
+    if (!ref || !ref.current) return;
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // setTimeout(() => {
+      //   ref.current.scrollIntoView({ behavior: 'smooth' });
+      // }, 100);
+    } else {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+      setSidebarOpen(false);
+    }
+  };
 
 
 
