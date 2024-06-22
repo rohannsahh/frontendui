@@ -3,7 +3,9 @@ import background from "../assets/loginbackground.webp"
 import {useNavigate} from "react-router-dom"
 import showPasswordIcon from '../assets/show-password.png';
 import hidePasswordIcon from '../assets/hide.png';
-
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -17,6 +19,32 @@ const Login = () => {
 //  const handleClick=()=>{
 //   navigate('/dashboard')
 //  }
+const handleGoogleSignUp = async (credentialResponse) => {
+  const decoded = jwtDecode(credentialResponse.credential);
+  const { name, email } = decoded;
+
+  try {
+    // Call your backend API to create a new user
+
+    const signUpResponse = await axios.post('http://localhost:5000/api/users/signup', { name, email, googleAuth: true });
+    
+    if (signUpResponse.data.success) {
+      // If signup is successful, automatically log the user in
+      const loginResponse = await axios.post('http://localhost:5000/api/users/login', { email, googleAuth: true });
+      
+      if (loginResponse.data.success) {
+        // Store the token in localStorage or a secure storage method
+        localStorage.setItem('token', loginResponse.data.token);
+        
+        // Redirect to dashboard
+        navigate('/dashboard');
+      }
+    }
+  } catch (error) {
+    console.error('Error during Google Sign Up:', error);
+    // Handle error (e.g., show error message to user)
+  }
+};
 const handleLogin = async (event) => {
   event.preventDefault();
   setError('');
@@ -64,8 +92,15 @@ const handleLogin = async (event) => {
           {/* <button className="flex items-center justify-center bg-blue-100 text-blue-700 p-2 font-semibold rounded-md mx-2 w-1/2">
             <img src={require("../assets/google.png")} alt="Google" className="w-6 h-6 mr-2" />
             Google
-          </button>
-         
+          </button> */}
+         <GoogleLogin
+  onSuccess={handleGoogleSignUp}
+  onError={() => {
+    console.log('Google Login Failed');
+  }}
+  uxMode="redirect"
+  redirectUri={`${window.location.origin}/dashboard`}
+/>
         </div>
         <p className="text-center text-gray-600 mb-1">Or</p>
         <form onSubmit={handleLogin}>
