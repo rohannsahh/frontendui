@@ -13,6 +13,7 @@ import ChoosePrice from '../components/ChoosePrice';
 import Dashboard from '../components/Dashboard';
 import Blogs from '../components/Blogs';
 import Offers from '../components/Offers';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes = () => {
   return (
@@ -21,13 +22,40 @@ const AppRoutes = () => {
       <Route path="/know-us" element={<Knowus />} />
       <Route path="/how-it-works" element={ <HowItWorks/>} />
       <Route path="/pricing" element={<Pricing/>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp/>}/>
-      <Route path="/visaSelection" element={<VisaSelection/>}/>
-      <Route path="/attachDocuments" element={<AttachDocuments/>}/>
-      <Route path="/appointment" element={<AppointmentDate/>}/>
-      <Route path="/choosePrice" element={<ChoosePrice/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
+      <Route path="/login" element={
+      <ProtectedRoute requireAuth={false}>
+      <Login />
+      </ProtectedRoute>
+      } />
+      <Route path="/signup" element={
+        <ProtectedRoute requireAuth={false}>
+        <SignUp />
+      </ProtectedRoute>
+      }/>
+      <Route path="/visaSelection" element={
+      <ProtectedRoute requireAuth={true}>
+      <VisaSelection/>
+      </ProtectedRoute>
+      }/>
+      <Route path="/attachDocuments" element={
+      
+      <ProtectedRoute requireAuth={true}>
+      <AttachDocuments/>
+            </ProtectedRoute>
+      }/>
+      <Route path="/appointment" element={
+      <ProtectedRoute requireAuth={true}>
+      <AppointmentDate/>
+            </ProtectedRoute>
+      }/>
+      <Route path="/choosePrice" element={
+      <ProtectedRoute requireAuth={true}>
+<ChoosePrice/>
+      </ProtectedRoute>
+      }/>
+      <Route path="/dashboard" element={<ProtectedRoute requireAuth={true}>
+              <Dashboard />
+            </ProtectedRoute>}/>
       <Route path='/blogs' element={<Blogs/>}/>
       <Route path='/offers' element={<Offers/>}/>
       {/* <Route path='/pricing' element={<Pricing/>}/> */}
