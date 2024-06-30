@@ -8,7 +8,7 @@ const HeroSection = () => {
 
 
   const handleClick=()=>{
-navigate('/login')  }
+navigate('/dashboard')  }
 
   return (
     <div className="flex flex-col h-screen items-center justify-center text-white text-center px-4 md:px-0" style={{background: "linear-gradient(rgba(0, 0, 128, 1), rgba(0, 0, 61, 1))"
