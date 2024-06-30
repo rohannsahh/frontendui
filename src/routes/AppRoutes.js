@@ -53,7 +53,7 @@ const AppRoutes = () => {
 <ChoosePrice/>
       </ProtectedRoute>
       }/>
-      <Route path="/dashboard" element={<ProtectedRoute requireAuth={true}>
+      <Route path="/dashboard" element={<ProtectedRoute requireAuth={false}>
               <Dashboard />
             </ProtectedRoute>}/>
       <Route path='/blogs' element={<Blogs/>}/>
