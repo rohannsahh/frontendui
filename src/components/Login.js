@@ -16,64 +16,64 @@ const Login = () => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-//  const handleClick=()=>{
-//   navigate('/dashboard')
-//  }
-const handleGoogleSignUp = async (credentialResponse) => {
-  const decoded = jwtDecode(credentialResponse.credential);
-  const { name, email } = decoded;
+ const handleClick=()=>{
+  navigate('/dashboard')
+ }
+// const handleGoogleSignUp = async (credentialResponse) => {
+//   const decoded = jwtDecode(credentialResponse.credential);
+//   const { name, email } = decoded;
 
-  try {
-    // Call your backend API to create a new user
+//   try {
+//     // Call your backend API to create a new user
 
-    const signUpResponse = await axios.post('http://localhost:5000/api/users/signup', { name, email, googleAuth: true });
+//     const signUpResponse = await axios.post('http://localhost:5000/api/users/signup', { name, email, googleAuth: true });
     
-    if (signUpResponse.data.success) {
-      // If signup is successful, automatically log the user in
-      const loginResponse = await axios.post('http://localhost:5000/api/users/login', { email, googleAuth: true });
+//     if (signUpResponse.data.success) {
+//       // If signup is successful, automatically log the user in
+//       const loginResponse = await axios.post('http://localhost:5000/api/users/login', { email, googleAuth: true });
       
-      if (loginResponse.data.success) {
-        // Store the token in localStorage or a secure storage method
-        localStorage.setItem('token', loginResponse.data.token);
+//       if (loginResponse.data.success) {
+//         // Store the token in localStorage or a secure storage method
+//         localStorage.setItem('token', loginResponse.data.token);
         
-        // Redirect to dashboard
-        navigate('/dashboard');
-      }
-    }
-  } catch (error) {
-    console.error('Error during Google Sign Up:', error);
-    // Handle error (e.g., show error message to user)
-  }
-};
-const handleLogin = async (event) => {
-  event.preventDefault();
-  setError('');
+//         // Redirect to dashboard
+//         navigate('/dashboard');
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error during Google Sign Up:', error);
+//     // Handle error (e.g., show error message to user)
+//   }
+// };
+// const handleLogin = async (event) => {
+//   event.preventDefault();
+//   setError('');
 
-  try {
-    const response = await fetch('http://localhost:5000/api/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+//   try {
+//     const response = await fetch('http://localhost:5000/api/users/login', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ email, password }),
+//     });
 
-    if (!response.ok) {
-      throw new Error('Login failed');
-    }
+//     if (!response.ok) {
+//       throw new Error('Login failed');
+//     }
 
-    const data = await response.json();
-    const token = data.token;
+//     const data = await response.json();
+//     const token = data.token;
 
-    // Store the token in localStorage
-    localStorage.setItem('accessToken', token);
+//     // Store the token in localStorage
+//     localStorage.setItem('accessToken', token);
 
-    // Redirect to the dashboard
-    navigate('/dashboard');
-  } catch (error) {
-    setError('Invalid email or password');
-  }
-};
+//     // Redirect to the dashboard
+//     navigate('/dashboard');
+//   } catch (error) {
+//     setError('Invalid email or password');
+//   }
+// };
 
 
   return (
@@ -93,17 +93,17 @@ const handleLogin = async (event) => {
             <img src={require("../assets/google.png")} alt="Google" className="w-6 h-6 mr-2" />
             Google
           </button> */}
-         <GoogleLogin
+         {/* <GoogleLogin
   onSuccess={handleGoogleSignUp}
   onError={() => {
     console.log('Google Login Failed');
   }}
   uxMode="redirect"
   redirectUri={`${window.location.origin}/dashboard`}
-/>
+/> */}
         </div>
         <p className="text-center text-gray-600 mb-1">Or</p>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleClick}>
           <div className="mb-4">
             <label className="block text-black mb-2" htmlFor="email">Email</label>
             <input className="w-full p-2 border border-gray-300 rounded-md" type="email" id="email" 

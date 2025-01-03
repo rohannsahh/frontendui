@@ -33,23 +33,23 @@ const AppRoutes = () => {
       </ProtectedRoute>
       }/>
       <Route path="/visaSelection" element={
-      <ProtectedRoute requireAuth={true}>
+      <ProtectedRoute requireAuth={false}>
       <VisaSelection/>
       </ProtectedRoute>
       }/>
       <Route path="/attachDocuments" element={
       
-      <ProtectedRoute requireAuth={true}>
+      <ProtectedRoute requireAuth={false}>
       <AttachDocuments/>
             </ProtectedRoute>
       }/>
       <Route path="/appointment" element={
-      <ProtectedRoute requireAuth={true}>
+      <ProtectedRoute requireAuth={false}>
       <AppointmentDate/>
             </ProtectedRoute>
       }/>
       <Route path="/choosePrice" element={
-      <ProtectedRoute requireAuth={true}>
+      <ProtectedRoute requireAuth={false}>
 <ChoosePrice/>
       </ProtectedRoute>
       }/>
